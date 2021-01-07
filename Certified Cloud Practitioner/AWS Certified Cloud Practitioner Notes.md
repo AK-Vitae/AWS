@@ -107,3 +107,64 @@ Client <----------> Network <----------> Server
 * **Compute**: Pay for compute time
 * **Storage**: Pay for data stored
 * **Data transfer**: Pay for data transfer OUT of the cloud. Into the cloud is free
+
+## IAM
+
+### Users and Groups
+
+* IAM = Identity and Access Management
+* A **global** service
+* **Root account** created by default, and shouldn't be used or shared
+* **Users** are people within your organization, and can be grouped
+* **Groups** only contain users, not other groups
+
+### Permissions
+
+* Users or Groups can be assigned JSON documents called policies
+* Policies define the permissions of the users
+* **Least privilege principle**: Don't give more permission than a user needs
+
+### Account Security
+
+#### Password Policy
+
+*  Strong passwords = higher security for your account
+*  In AWS, you can setup a password policy:
+  * Set a minimum password length
+  * Require specific character types
+  * Allow all IAM users to change their own passwords
+  * Require users to change their password after some time (password expiration)
+  * Prevent password re-use
+
+#### Multi Factor Authentication - MFA
+
+* MFA = password you know + security device you own
+* Main benefit: If a password is stolen or hacked, the account is not compromised
+* MFA Devices:
+  * **Virtual MFA Device**:
+    * Google Authenticator: Phone only
+    * Authy: Multi-device
+  * Universal 2nd Factor (U2F) Security Key
+    * Physical Device
+  * **Hardware Key Fob MFA Device**
+  * **Hardware Key Fob MFA Device for AWS GovCloud**
+
+#### How can users access AWS
+
+* **AWS Management Console** (protected by password + MFA)
+* **AWS Command Line Interface (CLI)**: protected by access keys
+  * How to create access keys:
+    * Use IAM User account
+    * Go to security credentials and create access key
+    * Save/Copy access keys and secret access key
+    * When first using CLI: aws configure with access key, secret access key, and region code
+    * aws iam list-user to get all users in account
+* **AWS Software Developer Kit (SDK)** - for code: protected by access keys
+
+### IAM Roles
+
+* Some AWS service will need to perform actions on your behalf
+* IAM roles are a secure way to grant permissions to entities that you trust. 
+
+
+
