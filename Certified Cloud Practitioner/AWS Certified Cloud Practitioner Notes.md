@@ -166,5 +166,178 @@ Client <----------> Network <----------> Server
 * Some AWS service will need to perform actions on your behalf
 * IAM roles are a secure way to grant permissions to entities that you trust. 
 
+### IAM Security Tools
+
+* **IAM Credentials Report** (account-level): In IAM menu
+  * A report that lists all your account's users and the status of their various
+    credentials
+* **IAM Access Advisor** (user-level): A tab in the user's panel
+  * Access advisor shows the service permissions granted to a user and when those services were last accessed.
+  * Used to reduce privileges based on use
+
+### IAM Guidelines and Best Practices
+
+* Don’t use the root account except for AWS account setup
+* One physical user = One AWS user
+* Assign users to groups and assign permissions to groups
+* Create a strong password policy
+* Use and enforce the use of Multi Factor Authentication (MFA)
+* Create and use Roles for giving permissions to AWS services
+* Use Access Keys for Programmatic Access (CLI / SDK)
+* Audit permissions of your account with the IAM Credentials Report
+
+### Shared Responsibility Model for IAM
+
+#### AWS Responsibilities
+
+* Infrastructure
+* Configuration and vulnerability analysis
+* Compliance validation
+
+#### Your Responsibilities
+
+* Users, Groups, Roles, Policies management and monitoring
+* Enable MFA on all accounts
+* Rotate all your keys often
+* Use IAM tools to apply appropriate permissions
+* Analyze access patterns & review permissions
+
+## EC2
+
+*  EC2 = Elastic Compute Cloud = Infrastructure as a Service
+
+### EC2 sizing and configuration
+
+* Operating System ( OS ): Linux or Windows
+* How much compute power & cores ( CPU )
+* How much random-access memory ( RAM )
+* How much storage space:
+  * Network-attached ( EBS & EFS )
+  * Hardware ( EC2 Instance Store )
+* Network card: speed of the card, Public IP address
+* Firewall rules: security group
+* Bootstrap script (configure at first launch): EC2 User Data
+* t2.micro is the free tier
+
+### Security Groups
+
+* They control how traffic is allowed into or out of our EC2 Instances.
+* Security groups **only contain allow rules**
+* Security groups rules **can reference by IP or by security group**
+* Firewall on EC2 instances
+* They regulate: 
+  * Access to Ports
+  * Authorized IP ranges – IPv4 and IPv6
+  * Control of inbound network (from other to the instance)
+  * Control of outbound network (from the instance to other)
+
+### Classic Ports
+
+* 22 = SSH (Secure Shell) - log into a Linux instance
+* 21 = FTP (File Transport Protocol) – upload files into a file share
+* 22 = SFTP (Secure File Transport Protocol) – upload files using SSH
+* 80 = HTTP – access unsecured websites
+* 443 = HTTPS – access secured websites
+* 3389 = RDP (Remote Desktop Protocol) – log into a Windows instance
+
+* Sources:
+  * 0.0.0.0/0 = Everywhere on ipv4
+  * ::/0 = Everywhere on ipv6
+* Timeout caused by problems in security group rules
+
+### SSH and EC2 Instance Connect
+
+**Windows:** 
+
+* Command Line or PowerShell
+* Use command: ssh -i location\EC2Tutorial.pem ec2-user@public-ip-of-instance
+
+**EC2 Instance Connect:**
+
+* Go to instances
+* Click on an instance and click connect
+* Use EC2 Instance Connect
+
+### EC2 IAM Roles
+
+* Go to instance
+* Right click to get security and go to modify IAM role
+* Then add role defined in IAM
+* Do not use aws configure in ssh/instance connect
+
+### EC2 Instances Purchasing Options
+
+#### On-Demand Instances
+
+* short workload, predictable pricing
+* Pay for what you use:
+  * Linux - billing per second, after the first minute
+  * All other operating systems (ex: Windows) - billing per hour
+* Has the highest cost but no upfront payment
+* No long-term commitment
+
+#### Reserved: (MINIMUM 1 year)
+
+* **Reserved Instances:** long workloads
+  * Up to 72% discount compared to On-demand
+  * Reservation period: **1 year = + discount | 3 years = +++ discount**
+  * Purchasing options: **no upfront | partial upfront = + | All upfront = ++ discount**
+  * Reserve a specific instance type
+  * Recommended for **steady-state usage applications** (think database)
+* **Convertible Reserved Instances:** long workloads with flexible instances
+  * can change the EC2 instance type
+  * Up to 45% discount
+* **Scheduled Reserved Instances:** example – every Thursday between 3 and 6 pm
+  * launch within time window you reserve
+  * When you require a fraction of day / week / month
+  * Commitment for 1 year only
+
+* **Spot Instances**: short workloads, cheap, can lose instances (less reliable)
+  * Can get a discount of up to 90% compared to On-demand
+  * Instances that you can **“lose” at any point of time if your max price < current spot price**
+  * The **MOST cost-efficient** instances in AWS
+  * Useful for **workloads that are resilient to failure**
+    * Batch jobs
+    * Data analysis
+    * Image processing
+    * Any distributed workloads
+    * Workloads with a flexible start and end time
+  * **Not suitable for critical jobs or databases**
+* **Dedicated Hosts**: book an entire physical server, control instance placement
+  * Help address **compliance requirements**
+  * Reduce costs by allowing you to **use your existing server-bound software licenses**
+  * Allocated for your account for a 3-year period reservation
+  * More expensive
+  * Or for companies that have strong regulatory or compliance needs
+* **Dedicated Instances**: no other customers will share your hardware
+  * Instances running on hardware that’s dedicated to you
+  * No control over instance placement (can move hardware after Stop / Start)
+
+### Shared Responsibility Model for EC2
+
+#### AWS Responsibilities
+
+* Infrastructure
+* Isolation on physical hosts
+* Replacing faulty hardware
+* Compliance validation
+
+#### Your Responsibilities
+
+* Security Groups rules
+* Operating-system patches and updates
+* Software and utilities installed on the EC2 instance
+* IAM Roles assigned to EC2 & IAM user access management
+* Data security on your instance
+
+### EC2 Summary
+
+* EC2 Instance: AMI (OS) + Instance Size (CPU + RAM) + Storage + security groups + EC2 User Data
+* Security Groups: Firewall attached to the EC2 instance
+* EC2 User Data: Script launched at the first start of an instance
+* SSH: start a terminal into our EC2 Instances (port 22)
+* EC2 Instance Role: link to IAM roles
+* Purchasing Options: On-Demand, Spot, Reserved (Standard + Convertible + Scheduled), Dedicated Host, Dedicated Instance
+
 
 
