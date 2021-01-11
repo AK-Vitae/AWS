@@ -407,7 +407,59 @@ Client <----------> Network <----------> Server
 * Responsibility of any data on the drives
 * Understanding the risk of using EC2 Instance Store
 
+## Elastic Load Balancing & Auto Scaling Groups
+* **Scalability**: ability to accommodate a larger load by making the hardware stronger (scale up), or by adding nodes (scale out)
+* **Elasticity**: once a system is scalable, elasticity means that there will be some “auto-scaling” so that the system can scale based on the load. This is “cloud-friendly”: pay-per-use, match demand, optimize costs
+* **Agility**: (not related to scalability - distractor) new IT resources are only a click away, which means that you reduce the time to make those resources available to your developers from weeks to just minutes.
+* There are two kinds of scalability:
+  * Vertical Scalability
+  * Horizontal Scalability (= elasticity)
+* Scalability is linked but different to High Availability
 
+### Vertical Scalability
 
+* Means increasing the size of the instance
+* ex. t2.micro -> t2.large
+* Vertical scalability is very common for non distributed systems, such as a database.
+* There is a hardware limit
 
+### Horizontal Scalability
 
+* Means increasing the number of instances / systems for your application
+* This is very common for web applications / modern applications
+
+### High Availability
+
+* Means running your application / system in at least 2 Availability Zones
+* The goal of high availability is to survive a data center loss (disaster)
+
+### Load Balancing
+
+* Load balancers are **servers that forward internet traffic to multiple servers** (EC2 Instances) downstream.
+* **Why use a load balancer?**
+  * Spread load across multiple downstream instances
+  * Expose a single point of access (DNS) to your application
+  * Seamlessly handle failures of downstream instances
+  * Do regular health checks to your instances
+  * Provide SSL termination (HTTPS) for your websites
+  * High availability across zones
+* An **ELB (Elastic Load Balancer)** is a managed load balancer
+  * AWS guarantees that it will be working
+  * AWS takes care of upgrades, maintenance, high availability
+  * AWS provides only a few configuration knobs
+  * Costs less to maintain your own load balancer but requires of maintenance and integrations
+  * **3 kinds of load balancers offered by AWS:**
+    * **Application Load Balancer** (**HTTP / HTTPS only**) – Layer 7
+    * **Network Load Balancer** (**ultra-high performance**, allows for TCP) – Layer 4
+    * **Classic Load Balancer** (slowly retiring) – Layer 4 & 7
+
+### Auto Scaling Group
+
+*  In real-life, the load on your websites and application can change
+*  In the cloud, you can create and get rid of servers very quickly
+* The goal of an Auto Scaling Group (ASG) is to:
+  * Scale out (add EC2 instances) to match an increased load and Scale (remove EC2 instances) to match a decreased load
+  * Ensure we have a minimum and a maximum number of machines running
+  * Automatically register new instances to a load balancer
+  * Replace unhealthy instances
+* **Cost Savings:** only run at an optimal capacity 

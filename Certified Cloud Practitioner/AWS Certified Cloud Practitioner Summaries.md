@@ -39,3 +39,16 @@
 ### EFS
 
 * Network file system, can be attached to 100s of instances in a region
+
+## ELB & ASG
+
+* **High Availability** vs **Scalability** (vertical and horizontal) vs **Elasticity** vs **Agility** in the Cloud
+* Elastic Load Balancers (ELB)
+  * Distribute traffic across backend EC2 instances, can be Multi-AZ
+  * Supports health checks
+  *  3 types: **Application** LB (HTTP – L7), **Network** LB (TCP – L4), **Classic** LB (old)
+* Auto Scaling Groups (ASG)
+  * Implement Elasticity for your application, across multiple AZ
+  * Scale EC2 instances based on the demand on your system, replace unhealthy
+  * Integrated with the ELB
+
