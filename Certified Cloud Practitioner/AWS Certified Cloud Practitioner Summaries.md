@@ -64,3 +64,15 @@
 * **S3 Lifecycle Rules:** transition objects between classes
 * **Snowball / Snowmobile:** import data onto S3 through a physical device
 * **Storage Gateway:** hybrid solution to extend on-premises storage to S3
+
+## Databases & Analytics
+
+* **Relational Databases** - OLTP: RDS & Aurora (SQL)
+* **In-memory Database:** ElastiCache
+* **Key/Value Database:** DynamoDB (serverless)
+* **Warehouse - OLAP:** Redshift (SQL)
+* **Hadoop Cluster :** EMR
+* **Athena:** query data on Amazon S3 (serverless & SQL)
+* **Glue:** Managed ETL (Extract Transform Load) and Data Catalog service
+* **Database Migration:** DMS
+

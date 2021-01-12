@@ -653,3 +653,110 @@ Client <----------> Network <----------> Server
 
 * Bridge between on-premise data and cloud data in S3
 * **Hybrid storage service to allow on-premises to seamlessly use the AWS Cloud**
+
+## Databases
+
+* You can structure the data
+* You build indexes to efficiently query / search through the data
+* You define relationships between your datasets
+* Databases are optimized for a purpose and come with different features, shapes and constraints
+
+### Relational Databases
+
+* Can use the SQL language to perform queries / lookups
+
+### NoSQL Databases
+
+* NoSQL = non-SQL = non relational databases
+* Benefits:
+  * **Flexibility**: easy to evolve data model
+  * **Scalability**: designed to scale-out by using distributed clusters
+  * **High-performance**: optimized for a specific data model
+  * **Highly functional:** types optimized for the data model
+* **Examples**: Key-value, document, graph, in-memory, search databases
+
+### Databases & Shared Responsibility on AWS
+
+* AWS offers use to manage different databases
+* Benefits include:
+  * Quick Provisioning, High Availability, Vertical and Horizontal Scaling
+  * Automated Backup & Restore, Operations, Upgrades
+  * Operating System Patching is handled by AWS
+  * Monitoring, alerting
+
+### RDS
+
+* RDS stands for Relational Database Service
+* It’s a managed DB service for DB use SQL as a query language.
+
+#### Advantage over using RDS versus deploying DB on EC2
+
+* RDS is a managed service:
+* Automated provisioning, OS patching
+* Continuous backups and restore to specific timestamp (Point in Time Restore)!
+* Monitoring dashboards
+* Read replicas for improved read performance
+* Multi AZ setup for DR (Disaster Recovery)
+* Maintenance windows for upgrades
+* Scaling capability (vertical and horizontal)
+* Storage backed by EBS (gp2 or io1)
+* **CANNOT** SSH into your instances
+
+### Aurora
+
+* PostgreSQL and MySQL are both supported as Aurora DB
+* 5x performance improvement over MySQL on RDS, over 3x the performance of Postgres on RDS
+* Aurora storage automatically grows in increments of 10GB, up to 64 TB.
+*  Aurora costs more than RDS (20% more) – but is more efficient
+
+### ElastiCache
+
+* ElastiCache is to get managed Redis or Memcached
+* Caches are **in-memory databases** with high performance, low latency
+* Helps **reduce load off databases for read intensive workloads**
+
+### DynamoDB
+
+* Fully Managed Highly available with replication across 3 AZ
+* **NoSQL database - not a relational database**
+* Scales to massive workloads, distributed “ serverless ” database
+* Fast and consistent in performance
+* **Single-digit millisecond latency-low latency retrieval**
+* Low cost and auto scaling capabilities
+* DynamoDB is a key/value database
+
+### Redshift
+
+* Redshift is based on PostgreSQL, but it’s **not used for OLTP**
+* It’s OLAP – **online analytical processing (analytics and data warehousing)**
+* Load data once every hour, not every second
+* 10x better performance than other data warehouses, scale to PBs of data
+* **Columnar** storage of data (instead of row based)
+* Pay as you go based on the instances provisioned
+* BI tools such as AWS Quicksight or Tableau integrate with it
+
+### Amazon EMR
+
+* EMR stands for “Elastic MapReduce”
+* EMR helps creating **Hadoop clusters (Big Data)** to analyze and process vast amount of data
+* The clusters can be made of **hundreds of EC2 instances**
+* **Use cases: data processing, machine learning, web indexing, big data**
+
+### Athena
+
+* Fully Serverless database with SQL capabilities
+* Used to query data in S3
+* **Use Case: one-time SQL queries, serverless queries on S3, log analytics**
+
+### Glue
+
+* **Managed extract, transform, and load (ETL) service**
+* Useful to prepare and transform data for analytics
+
+### DMS – Database Migration Service
+
+* Quickly and securely migrate databases to AWS, resilient, self healing
+* The source database remains available during the migration
+* Supports Migrations:
+  * Homogenous: ex Oracle to Oracle
+  * Heterogenous: ex Microsoft SQL Server to Aurora
