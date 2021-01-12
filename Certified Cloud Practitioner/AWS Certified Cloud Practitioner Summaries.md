@@ -52,3 +52,15 @@
   * Scale EC2 instances based on the demand on your system, replace unhealthy
   * Integrated with the ELB
 
+## S3
+
+* **Buckets vs Objects**: global unique name, tied to a region
+* **S3 security:** IAM policy, S3 Bucket Policy (public access), S3 Encryption
+* **S3 Websites:** host a static website on Amazon S3
+* **S3 Versioning:** multiple versions for files, prevent accidental deletes
+* **S3 Access Logs:** log requests made within your S3 bucket
+* **S3 Replication:** same-region or cross-region, must enable versioning
+* **S3 Storage Classes:** Standard, IA, 1Z-IA, Intelligent, Glacier, Deep Archive
+* **S3 Lifecycle Rules:** transition objects between classes
+* **Snowball / Snowmobile:** import data onto S3 through a physical device
+* **Storage Gateway:** hybrid solution to extend on-premises storage to S3

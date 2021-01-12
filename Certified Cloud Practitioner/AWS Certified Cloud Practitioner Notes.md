@@ -463,3 +463,193 @@ Client <----------> Network <----------> Server
   * Automatically register new instances to a load balancer
   * Replace unhealthy instances
 * **Cost Savings:** only run at an optimal capacity 
+
+## S3
+
+* Global Service
+* Backup and storage
+* Disaster Recovery
+* Archive
+* Hybrid Cloud storage
+* Application/Media hosting
+* Data lakes & big data analytics
+* Software delivery
+* Static website
+
+### Buckets
+
+* Amazon S3 allows people to store objects (files) in “buckets” (directories)
+* Buckets must have a globally unique name (across all regions all accounts)
+* Buckets are defined at the **region level**
+
+### Objects
+
+* Objects (files) have a Key
+* The key is the FULL path:
+* The key is composed of prefix + object name
+* Object values are the content of the body:
+  * Max Object Size is 5TB (5000GB)
+  * If uploading more than 5GB, must use “multi-part upload”
+* Metadata (list of text key / value pairs – system or user metadata)
+* Tags
+* Version ID
+
+### Security
+
+* **User based**
+  * IAM policies - which API calls should be allowed for a specific user from IAM console
+* **Resource Based**
+  * Bucket Policies - bucket wide rules from the S3 console - allows cross account
+  * Object Access Control List (ACL) – finer grain
+  * Bucket Access Control List (ACL) – less common
+* **Note: an IAM principal can access an S3 object if**
+  * the user IAM permissions allow it OR the resource policy ALLOWS it
+  * AND there’s no explicit DENY
+* **Encryption**: encrypt objects in Amazon S3 using encryption keys
+
+#### S3 Bucket Policies
+
+* JSON based policies
+  * Resources: buckets and objects
+  * Actions: Set of API to Allow or Deny
+  * Effect: Allow / Deny
+  * Principal: The account or user to apply the policy to
+* Grant public access to the bucket
+  * Default access is blocked to prevent company data leaks
+  * Block public access settings at the account level
+* Force objects to be encrypted at upload
+* Grant access to another account 
+
+### S3 Websites and Versioning
+
+* Websites:
+  * S3 can host static websites and have them accessible on the www
+  * Website needs to be publicly accessible via bucket policy
+* Versioning is enabled at the bucket level:
+  * Protect against unintended deletes (ability to restore a version)
+  * Easy roll back to previous version
+
+### S3 Access Logs
+
+* For audit purpose, you may want to log all access to S3 buckets
+* Any request made to S3, from any account, authorized or denied, will be logged into another S3 bucket
+
+### S3 Replication (CRR & SRR)
+
+* Cross Region Replication (CRR):
+  * compliance, lower latency access, replication across accounts
+* Same Region Replication (SRR)
+  * log aggregation, live replication between production and test accounts
+* Must enable versioning in source and destination
+
+### S3 Storage Classes
+
+* Durability: How often you lose a file
+  * High durability (99.999999999%, 11 9’s) of objects across multiple AZ
+* Availability: Measures how readily available a service is
+  * S3 standard has 99.99% availability, which means it will not be available 53 minutes a year
+
+#### Amazon S3 Standard - General Purpose
+
+* **Availability**: 99.99%
+* Used for frequently accessed data
+* Low latency and high throughput
+* **Use Cases**: Big Data analytics, mobile & gaming applications, content distribution
+
+#### Amazon S3 Standard-Infrequent Access (IA)
+
+* Suitable for data that is less frequently accessed, but requires rapid access when needed
+
+* **Availability**: 99.9%
+* Lower cost compared to Amazon S3 Standard, but retrieval fee
+* **Use Cases**: As a data store for disaster recovery, backups
+
+#### S3 Intelligent-Tiering
+
+* **Availability**: 99.9%
+* Same low latency and high throughput performance of S3 Standard
+* **Cost-optimized by automatically moving objects between two access tiers** based on changing access patterns:
+  * Frequent access
+  * Infrequent access
+*  Resilient against events that impact an entire Availability Zone
+
+#### Amazon S3 One Zone-Infrequent Access
+
+* **Availability**: 99.5%
+* Low latency and high throughput performance
+* Lower cost compared to S3-IA (by 20%)
+* **Use Cases:** Storing secondary backup copies of on-premise data, or storing data you can recreate
+
+#### Amazon Glacier and Amazon Glacier Deep Archive
+
+* Low cost object storage (in GB/month) meant for archiving / backup
+* Data is retained for the longer term (years)
+* Amazon Glacier - Cheap:
+  * Expedited (1 to 5 minutes)
+  * Standard (3 to 5 hours)
+  * Bulk (5 to 12 hours)
+* Amazon Glacier Deep Archive – Cheapest:
+  * Standard (12 hours)
+  * Bulk (48 hours)
+
+### Shared Responsibility Model for S3
+
+#### AWS Responsibilities
+
+* Infrastructure (global security, durability, availability, sustain concurrent loss of data in
+  two facilities)
+* Configuration and vulnerability analysis
+* Compliance validation
+
+#### Your Responsibilities
+
+* S3 Versioning
+* S3 Bucket Policies
+* S3 Replication Setup
+* Logging and Monitoring
+* S3 Storage Classes
+* Data encryption at rest and in transit
+
+## Snowball
+
+* **Physical data transport solution** that helps moving TBs or PBs of data in or out of AWS
+* Alternative to moving data over the network (and paying network fees)
+* Pay per data transfer job
+* Use cases: large data cloud migrations, DC decommission, disaster recovery
+* **If it takes more than a week to transfer over the network, use Snowball devices**
+
+### Snowball Process
+
+1. Request snowball devices from the AWS console for delivery
+2. Install the snowball client on your servers
+3. Connect the snowball to your servers and copy files using the client
+4. Ship back the device when you’re done (goes to the right AWS facility)
+5. Data will be loaded into an S3 bucket
+6. Snowball is completely wiped
+
+### Snowball Edge
+
+* Snowball Edges (100 TB) add computational capability to the device
+* Supports EC2 AMI and Lambda functions
+* Supports custom Lambda functions
+* Use case: data migration, image collation, IoT capture, machine learning
+
+### AWS Snowmobile
+
+* Transfer exabytes of data (1 EB = 1,000 PB = 1,000,000 TBs)
+* **Better than Snowball if you transfer more than 10 PB**
+
+### Hybrid Cloud for Storage
+
+* AWS is pushing for ”hybrid cloud”
+  * Mix of on premises and on the cloud infrastructure
+* This can be due to:
+  *  Long cloud migrations
+  *  Security requirements
+  *  Compliance requirements
+  *  IT strategy
+
+#### AWS Storage Gateway
+
+* Bridge between on-premise data and cloud data in S3
+* **Hybrid storage service to allow on-premises to seamlessly use the AWS Cloud**
