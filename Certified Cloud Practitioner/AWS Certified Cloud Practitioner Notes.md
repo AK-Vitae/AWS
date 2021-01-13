@@ -848,3 +848,59 @@ Client <----------> Network <----------> Server
   * Websites (templates for WordPress, Magento, Plesk, Joomla)
   * Dev / Test environment
 * Has high availability but no auto-scaling, limited AWS integrations
+
+## Deploying and Managing Infrastructure at Scale 
+### CloudFormation
+
+* is a declarative way of outlining your AWS Infrastructure, for any resources
+* CloudFormation creates configuration in the **right order and exactly how you specify**
+* Used we need to repeat an architecture in different environments/regions/AWS accounts
+* Benefits 
+  * **Infrastructure as code**:
+    * No resources are manually created, which is excellent for control
+    * Changes to the infrastructure are reviewed through code
+  * **Cost:** 
+    * Each resources within the stack is tagged with an identifier so you can easily see how much a stack costs you
+    * You can estimate the costs of your resources using the CloudFormation template
+  * **Productivity:**
+    * Ability to destroy and re-create an infrastructure on the cloud on the fly
+    * Automated generation of Diagram for your templates
+  * **Supports (almost) all AWS resources**
+
+### Elastic Beanstalk
+
+* Elastic Beanstalk is a developer centric view of deploying an application on AWS
+* Beanstalk = Platform as a Service (PaaS)
+  * Managed service
+    * Instance configuration / OS is handled by Beanstalk
+    * Deployment strategy is configurable but performed by Elastic Beanstalk
+  * **Just the application code is the responsibility of the developer**
+  * Three architecture models:
+    *  Single Instance deployment: good for dev
+    * LB + ASG: great for production or pre-production web applications
+    * ASG only: great for non-web apps in production (workers, etc..)
+* Beanstalk is free but you pay for the underlying instances
+
+### CodeDeploy
+
+* **We want to deploy our application automatically**
+* **Works with EC2 Instances**
+* **Works with On-Premises Servers**
+* **Hybrid service**
+
+* Helps in upgrading versions
+
+### Systems Manager (SSM)
+
+* **Helps you manage your EC2 and On-Premises systems at scale**
+* **Another Hybrid AWS service**
+* Get operational insights about the state of your infrastructure
+* **Most important features are:**
+  * **Patching automation for enhanced compliance**
+  * **Run commands across an entire fleet of servers**
+  * Store parameter configuration with the SSM Parameter Store
+
+### OpsWorks
+
+* Chef & Puppet help you perform server configuration automatically, or repetitive actions
+* Only provision standard AWS resources 
