@@ -76,3 +76,25 @@
 * **Glue:** Managed ETL (Extract Transform Load) and Data Catalog service
 * **Database Migration:** DMS
 
+## Other Compute Services
+
+* **Docker**: container technology to run applications
+* **ECS**: run Docker containers on EC2 instances
+* **Fargate**:
+  * Run Docker containers without provisioning the infrastructure
+  * Serverless offering (no EC2 instances)
+* **ECR**: Private Docker Images Repository
+* **Batch**: run batch jobs on AWS across managed EC2 instances
+* **Lightsail**: predictable & low pricing for simple application & DB stacks
+
+## Lambda
+
+* Lambda is **Serverless, Function as a Service, seamless scaling, reactive**
+* **Lambda Billing:**
+  * By the time run x by the RAM provisioned
+  * By the number of invocations
+* **Language Support:** many programming languages except Docker
+* **Invocation time:** up to 15 minutes
+* **Use cases:**
+  * Create Thumbnails for images uploaded onto S3
+  * Run a Serverless cron job

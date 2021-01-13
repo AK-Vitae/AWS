@@ -760,3 +760,91 @@ Client <----------> Network <----------> Server
 * Supports Migrations:
   * Homogenous: ex Oracle to Oracle
   * Heterogenous: ex Microsoft SQL Server to Aurora
+
+## Other Compute Services
+
+### Docker
+
+* Docker is a software development platform to deploy apps
+* Apps are packaged in **containers** that can be run on any OS
+* **Apps run the same, regardless of where they’re run**
+* Scale containers up and down very quickly (seconds)
+
+#### Images
+
+* Docker images are stored in Docker Repositories
+* Public: Docker Hub https://hub.docker.com/
+* Private: Amazon ECR
+
+#### ECS
+
+* ECS = Elastic Container Service
+* **Launch Docker containers on AWS**
+* **Your Responsibilities:** must provision & maintain the infrastructure (the EC2 instances)
+* **AWS Responsibilities:** takes care of starting / stopping containers
+
+#### Fargate
+
+* **Launch Docker containers on AWS**
+* **Your Responsibilities:** You do not provision the infrastructure (no EC2 instances to manage)
+* **AWS Responsibilities:** Runs containers for you based on the CPU / RAM you need
+* Serverless offering
+
+#### ECR
+
+* Elastic Container Registry
+* Private Docker Registry
+* This is where you store your Docker images
+
+### Lambda
+
+* **Serverless**:
+  * A new paradigm in which the developers don’t have to manage servers anymore
+  * It means that you don't manage / provision / see servers
+  * ex. S3, DynamoDB, Fargate, Lambda
+* Virtual functions
+* Short executions
+* Run on- - demand
+* Scaling is automated 
+
+#### Benefits
+
+* Easy Pricing:
+  * **Pay per call/Pay per duration**
+  * Free tier of 1,000,000 AWS Lambda requests and 400,000 GBs of compute time
+* Integrated with the whole AWS suite of services
+* Event-Driven: functions get invoked by AWS when needed
+* Easy to get more resources per functions
+* Increasing RAM will also improve CPU and network
+
+### Batch
+
+* **Fully managed batch processing at any scale**
+* Efficiently run 100,000s of computing batch jobs on AWS
+* **A “batch” job is a job with a start and an end (opposed to continuous)**
+* **Batch will dynamically launch EC2 instances or Spot Instances**
+* Batch jobs are defined as Docker images and run on ECS
+* Helpful for cost optimizations and focusing less on the infrastructure
+
+### Batch vs Lambda
+* Lambda:
+  * Time limit
+  * Limited runtimes
+  * Limited temporary disk space
+  * Serverless
+* Batch:
+  * No time limit
+  * Any runtime as long as it’s packaged as a Docker image
+  * Rely on EBS / instance store for disk space
+  * Relies on EC2 (can be managed by AWS)
+
+### Lightsail
+
+* Virtual servers, storage, databases, and networking
+* **Low & predictable pricing**
+* **Great for people with little cloud experience**
+* Use cases: 
+  * Simple web applications (has templates for LAMP, Nginx, MEAN, Node.js…)
+  * Websites (templates for WordPress, Magento, Plesk, Joomla)
+  * Dev / Test environment
+* Has high availability but no auto-scaling, limited AWS integrations
