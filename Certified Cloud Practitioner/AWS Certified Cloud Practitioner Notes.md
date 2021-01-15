@@ -904,3 +904,80 @@ Client <----------> Network <----------> Server
 
 * Chef & Puppet help you perform server configuration automatically, or repetitive actions
 * Only provision standard AWS resources 
+
+## Global Infrastructure
+
+* A **global application** is an application deployed in **multiple geographies**
+* On AWS: this could be Regions and / or Edge Locations
+* **Decreased Latency**
+* **Disaster Recovery (DR)**
+* **Attack protection**
+
+### Route 53
+
+* Great to route users to the closest deployment with least latency
+* Great for disaster recovery strategies
+* **Route53 is a Managed DNS (Domain Name System)**
+  * DNS is a collection of rules and records which helps clients understand how to reach a server through URLs.
+* Records:
+  * A record (IPv4 mapping)
+  * AAAA (IPv6 mapping)
+  * CNAME (hostname to hostname)
+  * Alias (ELB, CloudFront, S3, RDS, etc … mapping)
+* Routing Policies:
+  * **Simple Routing Policy**: NO health checks)
+  * **Weighted Routing Policy**: Use health checks to distribute loads
+  * **Latent Routing Policy**: Redirection to closest server
+  * **Failover Routing Policy**: Redirection based on health of an instance
+
+### AWS CloudFront
+
+* Content Delivery Network (CDN)
+* **Improves read performance, content is cached at the edge**
+* **DDoS protection** (because worldwide), integration with Shield, AWS Web Application Firewall
+* CloudFront can cache from:
+  * **S3 bucket**
+    * For distributing files and caching them at the edge
+    * Enhanced security with CloudFront **Origin Access Identity (OAI)**
+    * CloudFront can be used as an ingress (to upload files to S3)
+  * **Custom Origin (HTTP**)
+    * Application Load Balancer
+    * EC2 instance
+    * S3 website (must first enable the bucket as a static S3 website)
+    * Any HTTP backend you want
+
+#### CloudFront vs S3 Cross Region Replication
+
+* CloudFront:
+  * Global Edge network
+  * Files are cached for a TTL (maybe a day)
+  * **Great for static content that must be available everywhere**
+
+* S3 Cross Region Replication:
+  * Must be setup for each region you want replication to happen
+  * Files are updated in near real-time
+  * Read only
+  * **Great for dynamic content that needs to be available at low-latency in few regions**
+
+### S3 Transfer Acceleration
+
+* Increase transfer speed by transferring file to an AWS edge location which will forward the data to the S3 bucket in the target region
+
+### AWS Global Accelerator
+
+* **Improve global application availability and performance using the AWS global network**
+* Leverage the AWS internal network to optimize the route to your application (60% improvement)
+* **2 Anycast IP are created for your application and traffic is sent through Edge Locations**
+
+### AWS Global Accelerator vs CloudFront
+
+* They both use the AWS global network and its edge locations
+* Both services integrate with AWS Shield for DDoS protection.
+* CloudFront - Content Delivery Network
+  * Improves performance for your cacheable content (such as images and videos)
+  * Content is served at the edge
+* Global Accelerator
+  * No caching, proxying packets at the edge to applications running in one or more AWS Regions.
+  * Improves performance for a wide range of applications over TCP or UDP
+  * Good for HTTP use cases that require static IP addresses
+  * Good for HTTP use cases that required deterministic, fast regional failover
