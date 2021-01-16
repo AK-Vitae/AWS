@@ -148,3 +148,21 @@
 * **X-Ray**: trace requests made through your distributed applications
 * **Service Health Dashboard:** status of all AWS services across all regions
 * **Personal Health Dashboard**: AWS events that impact your infrastructure
+
+## VPC
+
+* **VPC - Virtual Private Cloud:** private network to deploy your resources (regional resource)
+* **Subnets** allow you to partition your network inside your VPC (Availability Zone resource)
+  * A **public subnet** is a subnet that is accessible from the internet
+  * A **private subnet** is a subnet that is not accessible from the internet
+  * To define access to the internet and between subnets, we use Route Tables
+* **Internet Gateway:** at the VPC level, provide Internet Access
+* **NAT Gateway / Instances:** give internet access to private subnets
+* **NACL:** Stateless, subnet rules for inbound and outbound
+* **Security Groups:** Stateful, operate at the EC2 instance level or ENI
+* **VPC Peering:** Connect two VPC with non overlapping IP ranges, nontransitive
+* **VPC Endpoints:** Provide private access to AWS Services within VPC
+* **VPC Flow Logs:** network traffic logs
+* **Site to Site VPN:** VPN over public internet between on-premises DC and AWS
+* **Direct Connect:** direct private connection to AWS
+* **Transit Gateway:** Connect thousands of VPC and on-premises networks together
