@@ -166,3 +166,17 @@
 * **Site to Site VPN:** VPN over public internet between on-premises DC and AWS
 * **Direct Connect:** direct private connection to AWS
 * **Transit Gateway:** Connect thousands of VPC and on-premises networks together
+
+## Security & Compliance
+
+* **Shield**: Automatic DDoS Protection + 24/7 support for advanced
+* **WAF**: Firewall to filter incoming requests based on rules
+* **Penetration Testing**: No DDOS or zone walking
+* **KMS**: Encryption keys managed by AWS
+* **CloudHSM**::Hardware encryption, we manage encryption keys
+* **Artifact**: Get access to compliance reports such as PCI, ISO, etc…
+* **GuardDuty**: Find malicious behavior with VPC, DNS & CloudTrail Logs
+* **Inspector**: For EC2 only, install agent and find vulnerabilities
+* **Config**: Track config changes and compliance against rules
+* **Macie**: Find sensitive data (ex: PII data) in Amazon S3 buckets
+* **CloudTrail** : Track API calls made by users within account

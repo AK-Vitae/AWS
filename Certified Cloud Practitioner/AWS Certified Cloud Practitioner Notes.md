@@ -1075,3 +1075,104 @@ Client <----------> Network <----------> Server
 * **Direct Connect:** direct private connection to AWS
 * **Transit Gateway:** Connect thousands of VPC and on-premises networks together
 
+## Security and Compliance
+
+### AWS Shared Responsibility Model
+
+* **AWS Responsibility - Security of the Cloud**
+  * Protecting infrastructure (hardware, software, facilities, and networking) that runs all the AWS services
+  * Managed services like S3, DynamoDB, RDS, etc.
+* **Customer responsibility - Security in in the Cloud**
+  * For EC2 instance, customer is responsible for management of the guest OS (including security patches and updates), firewall & network configuration, IAM
+  * Encrypting application data
+* **Shared controls:**
+  * Patch Management, Configuration Management, Awareness & Training
+
+### DDOS Protection
+
+#### AWS Shield
+
+* **Standard**
+  * Free service that is activated for every AWS customer
+  * Provides protection from attacks such as SYN/UDP Floods, Reflection attacks
+    and other layer 3/layer 4 attacks
+* **Advanced:**
+  * Optional DDoS mitigation service ($3,000 per month per organization)
+  * Protect against more sophisticated attack on Amazon EC2, Elastic Load Balancing (ELB), Amazon CloudFront, AWS Global Accelerator, and Route 53
+  *  24/7 access to AWS DDoS response team (DRP)
+
+#### WAF
+
+* Protects your web applications from common web exploits (Layer 7)
+* Layer 7 is HTTP (vs Layer 4 is TCP)
+* Deploy on Application Load Balancer , API Gateway, CloudFront
+
+### Penetration Testing
+
+* Self test on their on AWS infrastructure without prior approval for 8 services
+* Prohibited Activities
+  * DNS zone walking via Amazon Route 53 Hosted Zones
+  * Denial of Service (DoS), Distributed Denial of Service (DDoS), Simulated DoS, Simulated DDoS
+  * Port flooding
+  * Protocol flooding
+  * Request flooding (login request flooding, API request flooding)
+
+### KMS (Key Management Service)
+
+* KMS = AWS manages the encryption keys
+* Some services require **Encryption to be Opt-in:**
+* **Encryption Automatically enabled:**
+  * **CloudTrail Logs**
+  * **S3 Glacier**
+  * **Storage Gateway**
+* **Key Types:**
+  * **Customer Manager CMK:**
+    * Create, manage and use, can enable or disable
+    * Possibility of rotation policy (new key generated every year, old key preserved)
+    * Possibility to bring-your-own-key
+  * **AWS managed CMK:**
+    * Used by AWS service (aws/s3, aws/ebs, aws/redshift)
+  * **CloudHSM Keys (custom keystore):**
+    *  Keys generated from your own CloudHSM hardware device
+    * Cryptographic operations are performed within the CloudHSM cluster
+
+### CloudHSM
+
+* CloudHSM => AWS provisions encryption hardware
+* You manage your own encryption keys entirely (not AWS)
+
+### Secrets Manager
+
+* Newer service, meant for storing secrets
+* Capability to force rotation of secrets every X days
+* Integration with Amazon RDS (MySQL, PostgreSQL, Aurora)
+
+### Artifact
+
+* Portal that provides customers with on-demand access to AWS compliance documentation and AWS agreements
+* Can be used to support internal audit or compliance
+
+### GuardDuty
+
+* Intelligent Threat discovery to Protect AWS Account
+* Uses Machine Learning algorithms, anomaly detection, 3rd party data
+
+### Inspector
+
+* Automated Security Assessments for EC2 instances
+* Analyze against unintended network accessibility
+
+### Config
+
+* Helps with auditing and recording compliance of your AWS resources
+* Helps record configurations and changes over time
+* AWS Config is a per-region service
+* Resource:
+  * View compliance of a resource over time
+  * View configuration of a resource over time
+  * View CloudTrail API calls if enabled
+
+### Macie
+
+* Amazon Macie is a fully managed data security and data privacy service that uses **machine learning and pattern matching to discover and protect your sensitive data in AWS.**
+* Macie helps identify and alert you to **sensitive data, such as personally identifiable information (PII)**
