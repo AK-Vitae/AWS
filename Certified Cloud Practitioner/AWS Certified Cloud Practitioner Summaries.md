@@ -123,3 +123,28 @@
   * Accelerate global uploads & downloads into Amazon S3
 * **AWS Global Accelerator:**
   * Improve global application availability and performance using the AWS global network
+
+## Cloud Integration
+
+* SQS:
+  * Queue service in AWS
+  * Multiple Producers, messages are kept up to 14 days
+  * Multiple Consumers share the read and delete messages when done
+  * Used to decouple applications in AWS
+* SNS:
+  * Notification service in AWS
+  * Subscribers: Email, Lambda, SQS, HTTP, Mobile…
+  * Multiple Subscribers, send all messages to all of them
+  * No message retention
+
+## Monitoring
+
+* **CloudWatch:**
+  * **Metrics** : monitor the performance of AWS services and billing metrics
+  * **Alarms** : automate notification, perform EC2 action, notify to SNS based on metric
+  * **Logs** : collect log files from EC2 instances, servers, Lambda functions…
+  * **Events** (or EventBridge): react to events in AWS, or trigger a rule on a schedule
+* **CloudTrail** : audit API calls made within your AWS account
+* **X-Ray**: trace requests made through your distributed applications
+* **Service Health Dashboard:** status of all AWS services across all regions
+* **Personal Health Dashboard**: AWS events that impact your infrastructure

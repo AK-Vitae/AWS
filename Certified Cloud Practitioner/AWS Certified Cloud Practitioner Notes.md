@@ -981,3 +981,23 @@ Client <----------> Network <----------> Server
   * Improves performance for a wide range of applications over TCP or UDP
   * Good for HTTP use cases that require static IP addresses
   * Good for HTTP use cases that required deterministic, fast regional failover
+
+## Cloud Integration
+
+* 2 patterns of application communication
+  * **Synchronous communications (application to application)**
+  * **Asynchronous / Event based (application to queue to application)**
+
+### SQS
+
+* Fully managed service (~serverless), use to **decouple** applications
+* **Messages are deleted after they’re read by consumers**
+* **Consumers share the work to read messages & scale horizontally**
+
+### SNS
+
+* One message to many receivers
+* The **“event publishers ”** only sends message to one SNS topic
+* The **“event publishers ”** only sends message to one SNS topic
+* As many “event subscribers ” as we want to listen to the SNS topic notifications
+
