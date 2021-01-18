@@ -180,3 +180,37 @@
 * **Config**: Track config changes and compliance against rules
 * **Macie**: Find sensitive data (ex: PII data) in Amazon S3 buckets
 * **CloudTrail** : Track API calls made by users within account
+
+## Machine Learning
+
+* **Rekognition**: face detection, labeling, celebrity recognition
+* **Transcribe**: audio to text (ex: subtitles)
+* **Polly**: text to audio
+* **Translate**: translations
+* **Lex**: build conversational bots – chatbots
+* **Connect**: cloud contact center
+* **Comprehend**: natural language processing
+* **SageMaker** : machine learning for every developer and data scientist
+
+## Billing and Costing Tools
+
+* **TCO Calculator:** To plan a move from on-premises to AWS
+* **Simple Monthly Calculator / Pricing Calculator:** cost of services on AWS
+* **Billing Dashboard:** high level overview + free tier dashboard
+* **Cost Allocation Tags:** tag resources to create details on reports
+* **Cost and Usage Reports:** most comprehensive billing dataset
+* **Cost Explorer:** View current usage (detailed) and forecast usage
+* **Billing Alarms:** in us-east-1 – track overall and per-service billing
+* **Budgets:** more advanced – track usage, costs, reserved instances, and get alerts
+
+## Account Best Practices
+* Operate multiple accounts using **Organizations**
+* Use **SCP** (service control policies) to restrict account power
+* **Use Tags & Cost Allocation Tags** for easy management & billing
+* **IAM guidelines:** MFA, least-privilege, password policy, password rotation
+* **Config** to record all resources configurations & compliance over time
+* **CloudFormation** to deploy stacks across accounts and regions
+* **Trusted Advisor** to get insights, Support Plan adapted to your needs
+* Send Service Logs and Access Logs to **S3 or CloudWatch Logs**
+* **CloudTrail** to record API calls made within your account
+* **If your Account is compromised:** change the root password, delete and rotate all passwords / keys, contact the AWS support

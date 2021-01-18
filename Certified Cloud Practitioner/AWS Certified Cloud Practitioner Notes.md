@@ -1176,3 +1176,167 @@ Client <----------> Network <----------> Server
 
 * Amazon Macie is a fully managed data security and data privacy service that uses **machine learning and pattern matching to discover and protect your sensitive data in AWS.**
 * Macie helps identify and alert you to **sensitive data, such as personally identifiable information (PII)**
+
+## Machine Learning
+
+### Rekognition
+
+* Find **objects, people, text, scenes in images and videos** using ML
+* **Facial analysis** and **facial search** to do user verification, people counting
+
+### Transcribe
+
+* Automatically **convert speech to text**
+* Uses a **deep learning process** called automatic speech recognition (ASR) to convert speech to text quickly and accurately
+
+### Polly
+
+* Turn **text into lifelike speech** using deep learning
+
+### Translate
+
+* Natural and accurate language translation
+* Amazon Translate allows you to localize content
+
+### Lex
+
+* Natural Language Understanding to recognize the intent of text, callers
+* Helps build chatbots, call center bots
+
+### Connect
+
+* Receive calls, create contact flows, cloud-based virtual contact center
+* Can integrate with other CRM systems or AWS
+
+### Comprehend
+
+* For Natural Language Processing – NLP
+* Uses machine learning to find insights and relationships in text
+
+### SageMaker
+
+* Fully managed service for developers / data scientists to build ML models
+* Typically difficult to do all the processes in one place + provision servers
+
+## Account Management, Billing & Support
+### Organizations
+
+* Global service
+* Allows to manage **multiple AWS accounts**
+* The main account is the master account
+* Cost Benefits:
+  * **Consolidated Billing** across all accounts - single payment method
+  * Pricing benefits from **aggregated usage** (volume discount for EC2, S3…)
+  * **Pooling of Reserved EC2** instances for optimal savings
+* API is available to **automate AWS account creation**
+* **Restrict account privileges using Service Control Policies (SCP)**
+
+* Create accounts per **department** , per **cost center**, per **dev / test / prod** , based on **regulatory restrictions** (using SCP), for **better resource isolation** (ex: VPC), to have **separate per-account service limits** , isolated account for **logging**
+
+### Pricing Models
+
+* AWS has 4 pricing models:
+* **Pay as you go:** pay for what you use, remain agile, responsive, meet scale demands
+* **Save when you reserve:** minimize risks, predictably manage budgets, comply with long-terms requirements
+  * Reservations are available for EC2 Reserved Instances, DynamoDB Reserved
+    Capacity, ElastiCache Reserved Nodes, RDS Reserved Instance, Redshift Reserved
+    Nodes
+* **Pay less by using more:** volume-based discounts
+* **Pay less as AWS grows**
+
+### Billing and Costing Tools
+
+* **Estimating costs in the cloud:**
+  * TCO Calculator
+  * Simple Monthly Calculator / Pricing Calculator
+* **Tracking costs in the cloud:**
+  * Billing Dashboard
+  * Cost Allocation Tags
+  * Cost and Usage Reports
+  * Cost Explorer
+* **Monitoring against costs plans:**
+  * Billing Alarms
+  * Budgets
+
+### TCO
+
+* AWS helps you reduce Total Cost of Ownership (TCO) by r**educing the need to invest in large capital expenditures** and providing a **pay-as-you-go model**
+* The TCO calculators allow you to **estimate the cost savings** when using AWS and provide a detailed set of reports that can be used in **executive presentations.**
+
+### Tracking Costs
+
+#### Cost Allocation Tags
+
+* Use **cost allocation tags** to track your AWS costs on a detailed level
+* **AWS generated tags** and **User-defined tags**
+
+#### Cost and Usage Reports
+
+* The AWS Cost & Usage Report contains the most comprehensive set of AWS cost and usage data available , including additional metadata about AWS services, pricing, and reservations (e.g., Amazon EC2 Reserved Instances (RIs)).
+
+#### Cost Explorer
+
+* Visualize, understand, and manage your AWS costs and usage over time
+* Analyze your data at a high level: total costs and usage across all accounts
+* **Forecast usage up to 3 months based on previous usage**
+
+### Monitoring Against Costs
+
+#### Billing Alarms in CloudWatch
+
+* Billing data metric is stored in CloudWatch us-east-1
+* Billing data are for overall worldwide AWS costs
+
+#### AWS Budgets
+
+* Create budget and send alarms when costs exceeds the budget
+* 3 types of budgets: Usage, Cost, Reservation
+
+### Trusted Advisor
+
+* Analyze your AWS accounts and provides recommendation
+* Full Trusted Advisor – Available for **Business & Enterprise support plans**
+  * Ability to set CloudWatch alarms when reaching limits
+  * **Programmatic Access using AWS Support API**
+
+### Support Plans
+
+#### Basic Support Plan
+
+* **Customer Service & Communities** - 24x7 access to customer service, documentation, whitepapers, and support forums.
+* **Trusted Advisor** - Access to the 7 core Trusted Advisor checks and guidance to provision your resources following best practices to increase performance and improve security.
+* **AWS Personal Health Dashboard** - A personalized view of the health of AWS services, and alerts when your resources are impacted.
+
+#### Developer Support Plan
+
+* All Basic Support Plan Features
+* **Business hours email access** to Cloud Support Associates
+* Unlimited cases / 1 primary contact
+* **Case severity / response times:**
+  * General guidance: < 24 business hours
+  * System impaired: < 12 business hours
+
+#### AWS Business Support Plan (24/7)
+
+* Intended to be used if you have **production workloads**
+* **Trusted Advisor** – Full set of checks + API access
+* 24x7 phone, email, and chat access to Cloud Support Engineers
+* **Case severity / response times:**
+  * General guidance: < 24 business hours
+  * System impaired: < 12 business hours
+  * **Production system impaired: < 4 hours**
+  * **Production system down: < 1 hour**
+
+#### Enterprise Support Plan (24/7)
+
+* Intended to be used if you have mission critical workloads
+* Access to a **Technical Account Manager (TAM)**
+* **Concierge Support Team** (for billing and account best practices)
+* **Infrastructure Event Management, Well-Architected & Operations Reviews**
+* **Case severity / response times:**
+  * General guidance: < 24 business hours
+  * System impaired: < 12 business hours
+  * Production system impaired: < 4 hours
+  * Production system down: < 1 hour
+  * **Business-critical system down: < 15 minutes**
+
