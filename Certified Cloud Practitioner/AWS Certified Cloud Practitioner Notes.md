@@ -208,6 +208,10 @@ Client <----------> Network <----------> Server
 
 ### EC2 sizing and configuration
 
+* AMI: 
+  * You must use an AMI from the same region as that of the EC2 instance. 
+  * The region of the AMI has no bearing on the performance of the EC2 instance
+
 * Operating System ( OS ): Linux or Windows
 * How much compute power & cores ( CPU )
 * How much random-access memory ( RAM )
@@ -387,9 +391,9 @@ Client <----------> Network <----------> Server
 ### EFS
 
 * EFS – Elastic File System
-* Managed NFS (network file system) that can be mounted on 100s of EC2
+* **Managed NFS (network file system) that can be mounted on 100s of EC2**
 * EFS works with Linux EC2 instances in multi-AZ
-* Highly available, scalable, expensive (3x gp2), pay per use, no capacity planning
+* **Highly available, scalable, expensive (3x gp2), pay per use, no capacity planning**
 
 ### Shared Responsibility Model for EC2 Storage
 
@@ -761,6 +765,18 @@ Client <----------> Network <----------> Server
   * Homogenous: ex Oracle to Oracle
   * Heterogenous: ex Microsoft SQL Server to Aurora
 
+### Deployment
+
+* **Multi-AZ:** 
+  * **High Availability**
+  * Spans at least 2 AZ in one region
+* **Multi-Region:**
+  * **Disaster Recovery and Local Performance**
+  * Each region can have Multi-AZ deployment
+* **Read Replica:** 
+  * **Scalability**
+  * Can be within an AZ, Cross-AZ or Cross Region
+
 ## Other Compute Services
 
 ### Docker
@@ -776,25 +792,25 @@ Client <----------> Network <----------> Server
 * Public: Docker Hub https://hub.docker.com/
 * Private: Amazon ECR
 
-#### ECS
+#### ECS (Server)
 
 * ECS = Elastic Container Service
 * **Launch Docker containers on AWS**
 * **Your Responsibilities:** must provision & maintain the infrastructure (the EC2 instances)
 * **AWS Responsibilities:** takes care of starting / stopping containers
 
-#### Fargate
+#### Fargate (Serverless)
 
 * **Launch Docker containers on AWS**
 * **Your Responsibilities:** You do not provision the infrastructure (no EC2 instances to manage)
 * **AWS Responsibilities:** Runs containers for you based on the CPU / RAM you need
-* Serverless offering
+* **Serverless offering**
 
-#### ECR
+#### ECR (Storage)
 
 * Elastic Container Registry
 * Private Docker Registry
-* This is where you store your Docker images
+* **This is where you store your Docker images**
 
 ### Lambda
 
@@ -852,7 +868,7 @@ Client <----------> Network <----------> Server
 ## Deploying and Managing Infrastructure at Scale 
 ### CloudFormation
 
-* is a declarative way of outlining your AWS Infrastructure, for any resources
+* CloudFormation allows you to use **programming languages or a simple text file to model and provision, in an automated and secure manner, all the resources needed for your applications across all Regions and accounts.**
 * CloudFormation creates configuration in the **right order and exactly how you specify**
 * Used we need to repeat an architecture in different environments/regions/AWS accounts
 * Benefits 
@@ -869,8 +885,8 @@ Client <----------> Network <----------> Server
 
 ### Elastic Beanstalk
 
-* Elastic Beanstalk is a developer centric view of deploying an application on AWS
-* Beanstalk = Platform as a Service (PaaS)
+* Elastic Beanstalk an easy-to-use service for deploying and scaling web applications and services. 
+* **Beanstalk = Platform as a Service (PaaS)**
   * Managed service
     * Instance configuration / OS is handled by Beanstalk
     * Deployment strategy is configurable but performed by Elastic Beanstalk
@@ -894,7 +910,7 @@ Client <----------> Network <----------> Server
 
 * **Helps you manage your EC2 and On-Premises systems at scale**
 * **Another Hybrid AWS service**
-* Get operational insights about the state of your infrastructure
+* **Get operational insights about the state of your infrastructure**
 * **Most important features are:**
   * **Patching automation for enhanced compliance**
   * **Run commands across an entire fleet of servers**
@@ -1054,7 +1070,7 @@ Client <----------> Network <----------> Server
 
 ### Service Health Dashboard
 
-* AWS Personal Health Dashboard provides **alerts and remediation guidance when AWS is experiencing events that may impact you** 
+* **AWS Personal Health Dashboard provides** **alerts and remediation guidance when AWS is experiencing events that may impact you** 
 * Personal Health Dashboard gives you a personalized view into the performance and availability of the AWS services underlying your AWS resources.
 
 ## VPC
@@ -1149,8 +1165,8 @@ Client <----------> Network <----------> Server
 
 ### Artifact
 
-* Portal that provides customers with on-demand access to AWS compliance documentation and AWS agreements
-* Can be used to support internal audit or compliance
+* Portal that provides customers with on-demand access to AWS **compliance documentation** and AWS agreements
+* **Can be used to support internal audit or compliance**
 
 ### GuardDuty
 
@@ -1164,8 +1180,8 @@ Client <----------> Network <----------> Server
 
 ### Config
 
-* Helps with auditing and recording compliance of your AWS resources
-* Helps record configurations and changes over time
+* **Helps with auditing and recording compliance of your AWS resources**
+* **Helps record configurations and changes over time**
 * AWS Config is a per-region service
 * Resource:
   * View compliance of a resource over time
@@ -1274,7 +1290,7 @@ Client <----------> Network <----------> Server
 
 * The AWS Cost & Usage Report contains the most comprehensive set of AWS cost and usage data available , including additional metadata about AWS services, pricing, and reservations (e.g., Amazon EC2 Reserved Instances (RIs)).
 
-#### Cost Explorer
+#### Cost Explorer (Forecast)
 
 * Visualize, understand, and manage your AWS costs and usage over time
 * Analyze your data at a high level: total costs and usage across all accounts
@@ -1339,4 +1355,120 @@ Client <----------> Network <----------> Server
   * Production system impaired: < 4 hours
   * Production system down: < 1 hour
   * **Business-critical system down: < 15 minutes**
+
+## Advanced Identity
+
+### Cognito
+
+* Identity for your Web and Mobile applications users (potentially millions)
+
+### Directory Services
+
+#### AWS Managed Microsoft AD
+
+* Create your own AD in AWS, manage users locally, supports MFA
+
+#### AD Connector
+
+* Directory Gateway (proxy) to redirect to on-premise AD
+
+#### Simple AD
+
+*  AD-compatible managed directory on AWS
+
+### AWS Single Sign-On (SSO)
+
+* Centrally manage Single Sign-On to access multiple accounts and 3rd - party business applications.
+* Integrated with AWS Organizations
+
+## Architecting & Ecosystem
+
+### Cloud Best Practices – Design Principles
+
+* **Scalability**: vertical & horizontal
+* **Disposable Resources:** servers should be disposable & easily configured
+* **Automation**: Serverless, Infrastructure as a Service, Auto Scaling…
+* **Loose Coupling:**
+  * Monolith are applications that do more and more over time, become bigger
+  * Break it down into smaller, loosely coupled components
+  * A change or a failure in one component should not cascade to other components
+* **Services, not Servers:**
+  * Don’t use just EC2
+  * Use managed services, databases, serverless, etc
+
+### Well Architected Framework 5 Pillars
+#### Operational Excellence
+
+* Design Principles
+  * **Perform operations as code** - Infrastructure as code
+  * **Annotate documentation** - Automate the creation of annotated documentation after every build
+  * **Make frequent, small, reversible changes** - So that in case of any failure, you can reverse it
+  * **Refine operations procedures frequently** - And ensure that team members are familiar with it
+  * **Anticipate failure**
+  * **Learn from all operational failures**
+
+#### Security
+
+* Design Principles
+  * **Implement a strong identity foundation** - Centralize privilege management and reduce (or even eliminate) reliance on long-term credentials - Principle of least privilege - IAM
+  * **Enable traceability** - Integrate logs and metrics with systems to automatically respond and take action
+  * **Apply security at all layers** - Like edge network, VPC, subnet, load balancer, every instance,operating system, and application
+  * **Automate security best practices**
+  * **Protect data in transit and at rest** - Encryption, tokenization, and access control
+  * **Keep people away from data** -  Reduce or eliminate the need for direct access or manual processing of data
+  * **Prepare for security events** - Run incident response simulations and use tools with automation to increase your speed for detection, investigation, and recovery
+
+#### Reliability
+
+* Design Principles
+  * **Test recovery procedures** - Use automation to simulate different failures or to recreate scenarios that led to failures before
+  * **Automatically recover from failure** - Anticipate and remediate failures before they occur
+  * **Scale horizontally to increase aggregate system availability** - Distribute requests across multiple, smaller resources to ensure that they don't share a common point of failure
+  * **Stop guessing capacity** - Maintain the optimal level to satisfy demand without over or under provisioning - Use Auto Scaling
+  * **Manage change in automation** - Use automation to make changes to infrastructure
+
+#### Performance Efficiency
+
+* Design Principles
+  * **Democratize advanced technologies** - Advance technologies become services and hence you can focus more on product development
+  * **Go global in minutes** - Easy deployment in multiple regions
+  * **Use serverless architectures** - Avoid burden of managing servers
+  * **Experiment more often** - Easy to carry out comparative testing
+  * **Mechanical sympathy** - Be aware of all AWS services
+
+#### Cost Optimization
+
+* Design Principles
+  * **Adopt a consumption mode** - Pay only for what you use
+  * **Measure overall efficiency** - Use CloudWatch
+  * **Stop spending money on data center operations** - AWS does the infrastructure part and enables customer to focus on organization projects
+  * **Analyze and attribute expenditure** - Accurate identification of system usage and costs, helps measure return on investment (ROI) - Make sure to use tags
+  * **Use managed and application level services to reduce cost of ownership** - As managed services operate at cloud scale, they can offer a lower cost per transaction or service
+
+### Ecosystem
+
+* **AWS Blogs**: https://aws.amazon.com/blogs/aws/
+* **AWS Forums** (community): https://forums.aws.amazon.com/index.jspa
+* **AWS Whitepapers & Guides**: https://aws.amazon.com/whitepapers
+* **AWS Quick Starts**: https://aws.amazon.com/quickstart/
+* **AWS Solutions**: https://aws.amazon.com/solutions/
+* **Vetted Technology Solutions for the AWS Cloud**
+
+* **Support:** 
+  * Developer
+  * Business
+  * Enterprise
+* **Marketplace**
+  * Digital catalog with thousands of software listings from independent software vendors (3rd party)
+  * You can sell your own solutions on the AWS Marketplace
+* **Training**
+  * AWS Digital (online) and Classroom Training (in-person or virtual)
+  * AWS Private Training (for your organization)
+* Professional Services & Partner Network
+  * APN = AWS Partner Network
+  * **APN Technology Partners:** providing hardware, connectivity, and software
+  * **APN Consulting Partners:** professional services firm to help build on AWS
+  * **APN Training Partners:** find who can help you learn AWS
+  * **AWS Competency Program:** AWS Competencies are granted to APN Partners who have demonstrated technical proficiency and proven customer success in specialized solution areas.
+  * **AWS Navigate Program:** help Partners become better Partners
 
