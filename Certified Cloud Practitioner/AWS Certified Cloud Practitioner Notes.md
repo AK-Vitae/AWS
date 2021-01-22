@@ -900,10 +900,10 @@ Client <----------> Network <----------> Server
 ### CodeDeploy
 
 * **We want to deploy our application automatically**
-* **Works with EC2 Instances**
-* **Works with On-Premises Servers**
+* Works with **EC2 Instances**
+* Works with **On-Premises Servers**
+* Works with **serverless Lambda functions**
 * **Hybrid service**
-
 * Helps in upgrading versions
 
 ### Systems Manager (SSM)

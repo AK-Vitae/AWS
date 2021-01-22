@@ -30,7 +30,18 @@
   * **EC2 User Data:** Script launched at the first start of an instance
 * **SSH**: start a terminal into our EC2 Instances (port 22)
 * **EC2 Instance Role:** link to IAM roles
-* **Purchasing Options:** On-Demand, Spot, Reserved (Standard + Convertible + Scheduled), Dedicated Host, Dedicated Instance
+* **Purchasing Options:** 
+  * **On-Demand**: short workload, predictable pricing 
+    * Linux: billing per second, after the first minute
+    * Other OS: billing per hour
+  * **Spot**: short workloads, **cheap**, can lose instances (less reliable)
+  * **Reserved** 
+    * Minimum **1 year**
+    * **Standard**: Long uninterrupted work loads
+    * **Convertible**: Long workloads with flexible instances
+    * **Scheduled**: Long workloads with scheduled downtime
+  * **Dedicated Host**: book an entire physical server, control instance placement
+  * **Dedicated Instance**: Instances running on hardware that’s dedicated to you
 
 ## EC2 Instance Storage
 
@@ -38,7 +49,7 @@
 
 * Network drives attached to one EC2 instance at a time
 * Mapped to an Availability Zones
-* Can use EBS Snapshots for backups / transferring EBS volumes across AZ
+* Can use **EBS Snapshots for backups / transferring EBS volumes across AZ**
 * You can **dynamically change the configuration** of a volume attached to an instance
 
 ### AMI
@@ -61,7 +72,7 @@
   * Distribute traffic across backend EC2 instances, can be Multi-AZ
   * Supports health checks
   * 3 types: 
-    *  **Application** LB (HTTP – L7): This is best suited for **load balancing of HTTP and HTTPS traffic** and provides advanced request routing targeted at the delivery of modern application architectures, including microservices and containers.
+    *  **Application** LB (HTTP – L7): This is best suited for **load balancing of HTTP and HTTPS traffic** and provides advanced request **routing targeted** at the delivery of modern application architectures, including microservices and containers.
     *  **Network** LB (TCP – L4): This is best suited for load balancing of Transmission Control Protocol (TCP), User Datagram Protocol (UDP) and Transport Layer Security (TLS) traffic where **extreme performance is required**
     *  **Classic** LB (old): This provides basic load balancing across multiple Amazon EC2 instances and operates at both the request level and connection level. 
 * **Auto Scaling Groups (ASG)**
@@ -95,9 +106,12 @@
     * It provides **cost-efficient and resizable capacity while automating time-consuming administration tasks** such as hardware provisioning, database setup, patching and backups.
   * **Aurora**: **MySQL and PostgreSQL-compatible** relational database
 * **In-memory Database:** **ElastiCache:** With this service, you can build **data-intensive apps or improve the performance** of your existing apps by retrieving data from **high throughput and low latency in-memory data stores**
-* **Key/Value Database:** **DynamoDB** (serverless) - **NoSQL**
-* **Warehouse - OLAP:** Redshift (SQL)
-* **Hadoop Cluster :** EMR
+* **DynamoDB:**
+  * **Key/Value Database** (serverless) - **NoSQL**
+  * Can be used to **store JSON** documents
+* **Redshift- OLAP:**  Data **Warehousing**
+* EMR: **Hadoop Clusters**
+  * data **processing, machine learning, web indexing**
 * **Athena:** query data on Amazon S3 (serverless & SQL)
 * **Glue:** Managed ETL (Extract Transform Load) and Data Catalog service
 * **Database Migration:** DMS
@@ -134,14 +148,17 @@
   * **Platform as a Service (PaaS)**, limited to certain programming languages or Docker
   * Deploy code consistently with a known architecture: ex, ALB + EC2 + RDS
 * **CodeDeploy (hybrid):** deploy & upgrade any application onto servers
-* **Systems Manager (hybrid):** patch, configure and run commands at scale
+  * Works with **EC2 instances, On-premises servers, and Lamda** functions. 
+* **Systems Manager (hybrid):** 
+  * patch, configure and run commands at scale
+  * **Get operational insights about the state of your infrastructure**
 * **OpsWorks (hybrid):** managed Chef and Puppet in AWS
 
 ## Global Applications
 
 * **Global DNS: Route 53**
-  * Great to route users to the closest deployment with least latency
-  * Great for disaster recovery strategies
+  * Great to **route users to the closest deployment with least latency**
+  * **Great for disaster recovery strategies**
   * Routing Policies:
     * **Weighted routing**: lets you associate multiple resources with a single domain name (example.com) or subdomain name (acme.example.com) and choose how much traffic is routed to each resource. 
     * **Failover routing policy** - This routing policy is used when you want to configure active-passive failover.
@@ -158,12 +175,10 @@
 ## Cloud Integration
 
 * **SQS:**
-  * Queue service in AWS
-  * Multiple Producers, messages are kept up to 14 days
-  * Multiple Consumers share the read and delete messages when done
-  * Used to decouple applications in AWS
+  * You can s**end, store, and receive messages between software components** at any volume, w**ithout losing messages or requiring other services to be available.**
+  * Used to **decouple applications** in AWS
 * **SNS:**
-  * Notification service in AWS
+  * **Notification service** in AWS
   * Subscribers: Email, Lambda, SQS, HTTP, Mobile…
   * Multiple Subscribers, send all messages to all of them
   * No message retention
@@ -178,7 +193,7 @@
 * **CloudTrail** : audit API calls made within your AWS account
 * **X-Ray**: 
   * **analyze and debug serverless and distributed applications** such as those built using a microservices architecture
-  * identify and troubleshoot the root cause of performance issues and errors
+  * identify and **troubleshoot the root cause of performance issues and errors**
 * **Service Health Dashboard:** 
   * Status of all AWS services across all regions
   * Can be used to subscribe to an RSS feed to be notified of services' interruptions
@@ -186,20 +201,22 @@
 
 ## VPC
 
-* **VPC - Virtual Private Cloud:** private network to deploy your resources (regional resource)
+* **VPC - Virtual Private Cloud:** private network in a logically **isolated section of the AWS Cloud**  to **deploy your resources (regional resource)**
 * **Subnets** allow you to partition your network inside your VPC (Availability Zone resource)
   * A **public subnet** is a subnet that is accessible from the internet
   * A **private subnet** is a subnet that is not accessible from the internet
   * To define access to the internet and between subnets, we use Route Tables
 * **Internet Gateway:** at the VPC level, **provide Internet Access**
-* **NAT Gateway / Instances:** **give internet access to private subnets**
+  * **Public subnet -> Public Internet**
+* **NAT Gateway / Instances:** give internet access to private subnets
+  * **Private subnet -> Public Internet**
 * **NACL:** Stateless, subnet rules for inbound and outbound
 * **Security Groups:** Stateful, operate at the EC2 instance level or ENI
 * **VPC Peering:** **Connect two VPC with non overlapping IP** ranges, nontransitive
 * **VPC Endpoints:** Provide **private access to AWS Services within VPC**
 * **VPC Flow Logs:** network traffic logs
 * **Site to Site VPN:** **VPN over public internet between on-premises DC and AWS**
-* **Direct Connect:** direct **private connection to AWS**
+* **Direct Connect:** direct private connection to AWS. **On-premises -> AWS**
 * **Transit Gateway:** **Connect thousands of VPC and on-premises networks together**
 
 ## Security & Compliance
@@ -209,14 +226,16 @@
 * **Penetration Testing**: No DDOS or zone walking
 * **KMS**: **Encryption keys managed by AWS**
 * **CloudHSM**: **Hardware** encryption, we manage encryption keys
-* **Artifact**: Get access to compliance reports such as PCI, ISO, etc…
-* **GuardDuty**: Find malicious behavior with VPC, DNS & CloudTrail Logs
-* **Inspector**: For EC2 only, install agent and find vulnerabilities
+* **Artifact**: Get access to compliance reports
+* **GuardDuty**: A threat detection service that **continuously monitors for malicious activity and unauthorized behavior** to protect your AWS accounts and workloads.
+* **Inspector**: For EC2 only
+  * automated security assessment service that helps improve the security and compliance of applications deployed on AWS
+  * **automatically assesses applications for exposure, vulnerabilities, and deviations from best practices**
 * **Config**: Track config changes and compliance against rules
 * **Macie**: Find sensitive data in Amazon S3 buckets
 * **CloudTrail** : 
-  * Track API calls made by users within account. 
-  * Log, monitor and retain account activity related to actions across your AWS infrastructure
+  * Track **API calls made by users within account.** 
+  * **Log, monitor and retain account activity** related to actions across your AWS infrastructure
 
 ## Machine Learning
 
@@ -258,6 +277,7 @@
     * **Fault Tolerance** – recommendations that help increase the resiliency of your AWS solution by highlighting redundancy shortfalls, current service limits, and over-utilized resources.
     * **Performance** – recommendations that can help to improve the speed and responsiveness of your applications.
     * **Service Limits** – recommendations that will tell you when service usage is more than 80% of the service limit.
+  * Full functionality available to **Business and Enterprise** levels
 * **Support Plan** adapted to your needs
   * **Basic**: A basic support plan is included for all AWS customers
   * **Developer**: Recommended if you are **experimenting or testing** in AWS.
